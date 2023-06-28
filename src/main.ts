@@ -3,7 +3,7 @@ import { NestExpressApplication } from "@nestjs/platform-express";
 import { AppModule } from "./app.module";
 import * as expressBasicAuth from "express-basic-auth";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
-import { ValidationPipe } from "@nestjs/common";
+import { Logger, ValidationPipe } from "@nestjs/common";
 import { HttpExceptionFilter } from "./common/exceptions/http-exception.filter";
 import helmet from "helmet";
 
@@ -37,6 +37,7 @@ async function bootstrap() {
     credentials: true,
   });
 
+  Logger.log(process.env.PORT || 3000);
   await app.listen(process.env.PORT || 3000);
 }
 bootstrap();
