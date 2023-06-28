@@ -3,7 +3,7 @@ import { NestExpressApplication } from "@nestjs/platform-express";
 import { AppModule } from "./app.module";
 import * as expressBasicAuth from "express-basic-auth";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
-import { Logger, ValidationPipe } from "@nestjs/common";
+import { ValidationPipe } from "@nestjs/common";
 import { HttpExceptionFilter } from "./common/exceptions/http-exception.filter";
 import helmet from "helmet";
 
