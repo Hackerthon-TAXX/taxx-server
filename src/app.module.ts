@@ -7,6 +7,7 @@ import { UsersModule } from "./users/users.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { Users } from "./users/entities/users.entity";
 import { RidersModule } from "./riders/riders.module";
+import { Riders } from "./riders/entities/riders.entity";
 
 @Module({
   imports: [
@@ -21,7 +22,7 @@ import { RidersModule } from "./riders/riders.module";
       username: process.env.DB_USER,
       password: process.env.DB_PASS,
       database: process.env.DB_BASE,
-      entities: [Users],
+      entities: [Users, Riders],
       synchronize: true,
     }),
     UsersModule,
