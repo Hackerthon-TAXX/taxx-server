@@ -14,7 +14,7 @@ async function bootstrap() {
   app.useGlobalFilters(new HttpExceptionFilter());
   app.use(helmet());
   app.use(
-    ["/admin-docs", "/admin-docs-json"],
+    ["/docs", "/docs-json"],
     expressBasicAuth({
       challenge: true,
       users: {
@@ -30,14 +30,13 @@ async function bootstrap() {
   };
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup("admin-docs", app, document, swaggerCustomOptions);
+  SwaggerModule.setup("docs", app, document, swaggerCustomOptions);
 
   app.enableCors({
     origin: true,
     credentials: true,
   });
 
-  Logger.log(process.env.PORT || 3000);
   await app.listen(process.env.PORT || 3000);
 }
 bootstrap();
