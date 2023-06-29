@@ -36,7 +36,7 @@ export class RidersService {
   }
 
   async update(id: number, body: RidersUpdateDto) {
-    const find = await this.findOne(id);
+    await this.findOne(id);
 
     await this.ridersRepository.update(id, body);
     return id;

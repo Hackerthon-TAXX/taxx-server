@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryColumn } from "typeorm";
+import { Histories } from "src/histories/entities/histories.entity";
+import { Entity, Column, PrimaryColumn, OneToMany } from "typeorm";
 
 @Entity()
 export class Users {
@@ -10,4 +11,7 @@ export class Users {
 
   @Column({ type: "json", nullable: true })
   payments: Array<Object>;
+
+  @OneToMany(() => Histories, (history) => history.users)
+  histories: Histories[];
 }
