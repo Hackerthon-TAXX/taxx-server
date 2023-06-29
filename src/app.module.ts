@@ -12,8 +12,10 @@ import { EvalsModule } from "./evals/evals.module";
 import { Evals } from "./evals/entities/eval.entity";
 import { HistoriesModule } from "./histories/histories.module";
 import { Histories } from "./histories/entities/histories.entity";
-import { NoticesModule } from './notices/notices.module';
+import { NoticesModule } from "./notices/notices.module";
 import { Notices } from "./notices/entities/notice.entity";
+import { UsersService } from "./users/users.service";
+import { RidersService } from "./riders/riders.service";
 
 @Module({
   imports: [
@@ -38,7 +40,7 @@ import { Notices } from "./notices/entities/notice.entity";
     NoticesModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, UsersService, RidersService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
