@@ -16,6 +16,7 @@ import { NoticesModule } from "./notices/notices.module";
 import { Notices } from "./notices/entities/notice.entity";
 import { UsersService } from "./users/users.service";
 import { RidersService } from "./riders/riders.service";
+import { EventsModule } from "./events/events.module";
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { RidersService } from "./riders/riders.service";
       entities: [Users, Riders, Histories, Evals, Notices],
       synchronize: true,
     }),
+    EventsModule,
     UsersModule,
     RidersModule,
     EvalsModule,

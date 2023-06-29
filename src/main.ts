@@ -8,17 +8,19 @@ import { HttpExceptionFilter } from "./common/exceptions/http-exception.filter";
 // import helmet from "helmet";
 import { SuccessInterceptor } from "./common/interceptors/success.interceptor";
 import { join } from "path";
+import { WsAdapter } from "@nestjs/platform-ws";
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  app.useWebSocketAdapter(new WsAdapter(app));
 
-  app.useStaticAssets(join(__dirname, "..", "public"), {
-    prefix: "/static",
-  });
   app.useGlobalInterceptors(new SuccessInterceptor());
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalFilters(new HttpExceptionFilter());
   // app.use(helmet({ contentSecurityPolicy: false }));
+  app.useStaticAssets(join(__dirname, "..", "public"), {
+    prefix: "/static",
+  });
   app.use(
     ["/docs", "/docs-json"],
     expressBasicAuth({
@@ -30,13 +32,8 @@ async function bootstrap() {
   );
 
   const config = new DocumentBuilder().setTitle("taxx").setVersion("0.0.1").setDescription("SW Hack").build();
-
-  const swaggerCustomOptions = {
-    swaggerOptions: {},
-  };
-
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup("docs", app, document, swaggerCustomOptions);
+  SwaggerModule.setup("docs", app, document, {});
 
   app.enableCors({
     origin: true,
@@ -44,5 +41,6 @@ async function bootstrap() {
   });
 
   await app.listen(process.env.PORT || 3000);
+  console.log(`Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();
