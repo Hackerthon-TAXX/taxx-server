@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { RidersCreateDto } from "./dto/riders.create.dto";
 import { RidersUpdateDto } from "./dto/riders.update.dto";
 import { Riders } from "./entities/riders.entity";
@@ -25,35 +25,37 @@ export class RidersService {
     });
   }
 
-  findOne(id: number) {
-    return this.ridersRepository.findOne({ where: { id } });
+  async findOne(id: number) {
+    const find = await this.ridersRepository.findOne({ where: { id } });
+
+    if (!find) {
+      throw new HttpException("not found", HttpStatus.OK);
+    }
+
+    return find;
   }
 
   async update(id: number, body: RidersUpdateDto) {
     const find = await this.findOne(id);
 
-    if (find) {
-      await this.ridersRepository.update(id, body);
-      return id;
-    } else {
-      return "not found";
-    }
+    await this.ridersRepository.update(id, body);
+    return id;
   }
 
   async remove(id: number) {
     const find = await this.findOne(id);
 
-    if (find) {
-      await this.ridersRepository.remove(find);
-      return id;
-    } else {
-      return "not found";
-    }
+    await this.ridersRepository.remove(find);
+    return id;
   }
 
   async getRidersLocation(latitude: number, longitude: number) {
     const findRiders = await this.findAll();
     const locationList = [];
+
+    if (findRiders === null) {
+      return null;
+    }
 
     findRiders.map((rider) => {
       locationList.push({
