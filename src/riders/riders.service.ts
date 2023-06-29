@@ -36,7 +36,7 @@ export class RidersService {
   }
 
   async update(id: number, body: RidersUpdateDto) {
-    const find = await this.findOne(id);
+    await this.findOne(id);
 
     await this.ridersRepository.update(id, body);
     return id;
@@ -59,6 +59,7 @@ export class RidersService {
 
     findRiders.map((rider) => {
       locationList.push({
+        id: rider.id,
         name: rider.name,
         image: rider.image,
         distance: getDistance(rider.latitude, rider.longitude, latitude, longitude),

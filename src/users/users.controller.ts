@@ -8,7 +8,6 @@ import { UsersPaymentsDto } from "./dto/users.payments.dto";
 
 @ApiTags("Users")
 @Controller("users")
-@UseInterceptors(SuccessInterceptor)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
