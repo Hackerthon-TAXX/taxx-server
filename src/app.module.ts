@@ -8,6 +8,8 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { Users } from "./users/entities/users.entity";
 import { RidersModule } from "./riders/riders.module";
 import { Riders } from "./riders/entities/riders.entity";
+import { EvalsModule } from './evals/evals.module';
+import { Evals } from "./evals/entities/eval.entity";
 import { HistoriesModule } from "./histories/histories.module";
 import { Histories } from "./histories/entities/histories.entity";
 
@@ -24,11 +26,12 @@ import { Histories } from "./histories/entities/histories.entity";
       username: process.env.DB_USER,
       password: process.env.DB_PASS,
       database: process.env.DB_BASE,
-      entities: [Users, Riders, Histories],
+      entities: [Users, Riders, Histories, Evals],
       synchronize: true,
     }),
     UsersModule,
     RidersModule,
+    EvalsModule,
     HistoriesModule,
   ],
   controllers: [AppController],
