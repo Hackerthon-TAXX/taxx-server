@@ -1,6 +1,6 @@
-# OSS Notice | taxx-server #
+# OSS Notice | TAXX #
 
-This application is Copyright © (owner name). All rights reserved.
+This application is Copyright © TAXX Team. All rights reserved.
 
 The following sets forth attribution notices for third party software that may be contained in this application.
 
