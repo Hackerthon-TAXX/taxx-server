@@ -1,9 +1,9 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { NoticesCreateDto } from './dto/notices.create.dto';
-import { Notices } from './entities/notice.entity';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { NoticesUpdateDto } from './dto/notices.update.dto';
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { NoticesCreateDto } from "./dto/notices.create.dto";
+import { Notices } from "./entities/notice.entity";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { NoticesUpdateDto } from "./dto/notices.update.dto";
 
 @Injectable()
 export class NoticesService {
@@ -34,9 +34,8 @@ export class NoticesService {
     return find;
   }
 
-  // TODO: Work
   async update(id: number, body: NoticesUpdateDto) {
-    const find = await this.findOne(id);
+    await this.findOne(id);
 
     await this.noticesRepository.update(id, body);
     return id;

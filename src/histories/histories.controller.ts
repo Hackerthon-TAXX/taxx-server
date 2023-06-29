@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from "@nestjs/common";
+import { Controller, Get, Post, Body, Param, Delete } from "@nestjs/common";
 import { HistoriesService } from "./histories.service";
 import { HistoriesCreateDto } from "./dto/histories.create.dto";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";

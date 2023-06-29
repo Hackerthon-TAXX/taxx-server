@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty, IsNumber, IsObject, IsOptional, IsString } from "class-validator";
+import { IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class RidersCreateDto {
   @ApiProperty({
@@ -40,7 +40,7 @@ export class RidersCreateDto {
 
   @ApiProperty({
     description: "Rider의 평점 총합",
-    example: 123,
+    example: 0,
     required: true,
   })
   @IsNotEmpty()
@@ -49,7 +49,7 @@ export class RidersCreateDto {
 
   @ApiProperty({
     description: "Rider의 평가 개수",
-    example: 123,
+    example: 0,
     required: true,
   })
   @IsNotEmpty()
