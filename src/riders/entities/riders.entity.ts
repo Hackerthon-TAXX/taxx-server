@@ -1,22 +1,25 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Riders {
-    @PrimaryColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    image: string;
+  @Column()
+  name: string;
 
-    @Column( {type: "float"})
-    latitude: number;
+  @Column()
+  image: string;
 
-    @Column( {type: "float"})
-    longitude: number;
+  @Column({ type: "float" })
+  latitude: number;
 
-    @Column({default:null, nullable: true})
-    sum: number;
+  @Column({ type: "float" })
+  longitude: number;
 
-    @Column({default:null, nullable: true})
-    count: number;
+  @Column({ default: null, nullable: true })
+  sum: number;
+
+  @Column({ default: null, nullable: true })
+  count: number;
 }
