@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { RidersService } from './riders/riders.service';
-import { getDistance, getRandomDistance } from './common/utils/useful.utils';
+import { getRandomDistance, strDistance } from './common/utils/useful.utils';
 
 @Injectable()
 export class AppService {
@@ -36,7 +36,7 @@ export class AppService {
       id: findRiders.id,
       latitude: moveLatitude,
       longitude: moveLongitude,
-      distance: getDistance(moveLatitude, moveLongitude, latitude, longitude),
+      distance: strDistance(moveLatitude, moveLongitude, latitude, longitude),
     };
   }
 }
