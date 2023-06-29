@@ -1,16 +1,22 @@
-import { Evals } from "src/evals/entities/eval.entity";
-import { Histories } from "src/histories/entities/histories.entity";
-import { Entity, Column, PrimaryColumn, OneToMany, CreateDateColumn } from "typeorm";
+import { Evals } from 'src/evals/entities/eval.entity';
+import { Histories } from 'src/histories/entities/histories.entity';
+import {
+  Entity,
+  Column,
+  PrimaryColumn,
+  OneToMany,
+  CreateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class Users {
-  @PrimaryColumn({type : "bigint"})
+  @PrimaryColumn({ type: 'bigint' })
   id: number;
 
   @Column()
   name: string;
 
-  @Column({ type: "json", nullable: true })
+  @Column({ type: 'json', nullable: true })
   payments: Array<Object>;
 
   @CreateDateColumn()

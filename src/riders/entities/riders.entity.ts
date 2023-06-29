@@ -1,5 +1,11 @@
-import { Histories } from "src/histories/entities/histories.entity";
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Histories } from 'src/histories/entities/histories.entity';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class Riders {
@@ -12,13 +18,13 @@ export class Riders {
   @Column()
   image: string;
 
-  @Column({ type: "double" })
+  @Column({ type: 'double' })
   latitude: number;
 
-  @Column({ type: "double" })
+  @Column({ type: 'double' })
   longitude: number;
 
-  @Column({ type: "float", nullable: true })
+  @Column({ type: 'float', nullable: true })
   sum: number;
 
   @Column({ nullable: true })

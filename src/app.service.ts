@@ -1,14 +1,13 @@
-import { Injectable } from "@nestjs/common";
-import { UsersService } from "./users/users.service";
-import { RidersService } from "./riders/riders.service";
-import { getDistance, getRandomDistance } from "./common/utils/useful.utils";
+import { Injectable } from '@nestjs/common';
+import { RidersService } from './riders/riders.service';
+import { getDistance, getRandomDistance } from './common/utils/useful.utils';
 
 @Injectable()
 export class AppService {
-  constructor(private readonly usersService: UsersService, private readonly ridersService: RidersService) {}
+  constructor(private readonly ridersService: RidersService) {}
 
   getHello(): string {
-    return "Online";
+    return 'Online';
   }
 
   async getRiderMove(riderId: number, latitude: number, longitude: number) {

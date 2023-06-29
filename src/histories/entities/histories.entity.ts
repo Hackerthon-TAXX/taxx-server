@@ -1,6 +1,12 @@
-import { Riders } from "src/riders/entities/riders.entity";
-import { Users } from "src/users/entities/users.entity";
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, CreateDateColumn } from "typeorm";
+import { Riders } from 'src/riders/entities/riders.entity';
+import { Users } from 'src/users/entities/users.entity';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  CreateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class Histories {
@@ -16,16 +22,16 @@ export class Histories {
   @Column()
   payments: string;
 
-  @Column({ type: "float" })
+  @Column({ type: 'float' })
   startLatitude: number;
 
-  @Column({ type: "float" })
+  @Column({ type: 'float' })
   startLongitude: number;
 
-  @Column({ type: "float" })
+  @Column({ type: 'float' })
   arrivalLatitude: number;
 
-  @Column({ type: "float" })
+  @Column({ type: 'float' })
   arrivalLongitude: number;
 
   @CreateDateColumn()

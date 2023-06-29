@@ -1,41 +1,80 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { NoticesService } from './notices.service';
 import { NoticesCreateDto } from './dto/notices.create.dto';
 import { NoticesUpdateDto } from './dto/notices.update.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
+/**
+ * 공지사항 관련 API 컨트롤러입니다.
+ */
 @ApiTags('Notices')
 @Controller('notices')
 export class NoticesController {
   constructor(private readonly noticesService: NoticesService) {}
 
-  @ApiOperation({ summary: "공지 생성" })
+  /**
+   * 새로운 공지사항을 생성합니다.
+   * @param {NoticesCreateDto} body - 공지사항 생성에 필요한 정보
+   * @returns {Promise<any>} 생성된 공지사항
+   */
+  @ApiOperation({ summary: '공지 생성' })
   @Post()
-  create(@Body() body: NoticesCreateDto) {
+  create(@Body() body: NoticesCreateDto): Promise<any> {
     return this.noticesService.create(body);
   }
 
-  @ApiOperation({ summary: "전체 공지" })
+  /**
+   * 모든 공지사항을 조회합니다.
+   * @returns {Promise<any[]>} 공지사항 목록
+   */
+  @ApiOperation({ summary: '전체 공지' })
   @Get()
-  findAll() {
+  findAll(): Promise<any[]> {
     return this.noticesService.findAll();
   }
 
-  @ApiOperation({ summary: "공지 정보" })
+  /**
+   * 특정 공지사항을 조회합니다.
+   * @param {string} id - 공지사항 ID
+   * @returns {Promise<any>} 조회된 공지사항
+   */
+  @ApiOperation({ summary: '공지 정보' })
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: string): Promise<any> {
     return this.noticesService.findOne(+id);
   }
 
-  @ApiOperation({ summary: "공지 정보 업데이트" })
+  /**
+   * 특정 공지사항의 정보를 업데이트합니다.
+   * @param {string} id - 공지사항 ID
+   * @param {NoticesUpdateDto} body - 업데이트할 공지사항 정보
+   * @returns {Promise<number>} 업데이트된 공지사항 ID
+   */
+  @ApiOperation({ summary: '공지 정보 업데이트' })
   @Patch(':id')
-  update(@Param('id') id: string, @Body() body: NoticesUpdateDto) {
+  update(
+    @Param('id') id: string,
+    @Body() body: NoticesUpdateDto,
+  ): Promise<number> {
     return this.noticesService.update(+id, body);
   }
 
-  @ApiOperation({ summary: "공지 정보 삭제" })
+  /**
+   * 특정 공지사항을 삭제합니다.
+   * @param {string} id - 공지사항 ID
+   * @returns {Promise<number>} 삭제된 공지사항 ID
+   */
+  @ApiOperation({ summary: '공지 정보 삭제' })
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: string): Promise<number> {
     return this.noticesService.remove(+id);
   }
 }

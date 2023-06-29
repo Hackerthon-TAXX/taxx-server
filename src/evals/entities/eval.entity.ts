@@ -1,13 +1,19 @@
-import { Riders } from "src/riders/entities/riders.entity";
-import { Users } from "src/users/entities/users.entity";
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Riders } from 'src/riders/entities/riders.entity';
+import { Users } from 'src/users/entities/users.entity';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class Evals {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: "float" })
+  @Column({ type: 'float' })
   rate: number;
 
   @Column({ nullable: true })

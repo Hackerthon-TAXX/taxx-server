@@ -1,30 +1,57 @@
-import { Logger } from "@nestjs/common";
-import { OnGatewayConnection, OnGatewayDisconnect, SubscribeMessage, WebSocketGateway, WebSocketServer } from "@nestjs/websockets";
-import { Server } from "ws";
+import { Logger } from '@nestjs/common';
+import {
+  OnGatewayConnection,
+  OnGatewayDisconnect,
+  SubscribeMessage,
+  WebSocketGateway,
+  WebSocketServer,
+} from '@nestjs/websockets';
+import { Server } from 'ws';
 
+/**
+ * 이벤트 관련 웹소켓 게이트웨이입니다.
+ */
 @WebSocketGateway(10009)
 export class EventsGateway implements OnGatewayConnection, OnGatewayDisconnect {
   private rooms: Record<string, any[]> = {};
   @WebSocketServer() server: Server;
 
-  public handleConnection(client): void {
-    client["id"] = this.generateUniqueId();
+  /**
+   * 클라이언트와의 연결이 맺어졌을 때 호출되는 메서드입니다.
+   * @param {any} client - 연결된 클라이언트
+   */
+  public handleConnection(client: any): void {
+    client['id'] = this.generateUniqueId();
     // Logger.log(client["id"], "Connection");
   }
 
-  public handleDisconnect(client): void {
-    Logger.debug(client["id"], "Disconnect");
+  /**
+   * 클라이언트와의 연결이 종료되었을 때 호출되는 메서드입니다.
+   * @param {any} client - 연결이 종료된 클라이언트
+   */
+  public handleDisconnect(client: any): void {
+    Logger.debug(client['id'], 'Disconnect');
     this.removeClientFromRooms(client);
   }
 
-  @SubscribeMessage("joinRoom")
+  /**
+   * 클라이언트가 특정 방에 참여하는 메시지 핸들러입니다.
+   * @param {any} client - 클라이언트
+   * @param {string} room - 참여할 방의 식별자
+   */
+  @SubscribeMessage('joinRoom')
   joinRoom(client: any, room: string): void {
     if (!this.rooms[room]) this.rooms[room] = [];
     this.rooms[room].push(client);
     Logger.log(`${room} - ${client.id}`);
   }
 
-  @SubscribeMessage("leaveRoom")
+  /**
+   * 클라이언트가 특정 방을 떠나는 메시지 핸들러입니다.
+   * @param {any} client - 클라이언트
+   * @param {string} room - 떠날 방의 식별자
+   */
+  @SubscribeMessage('leaveRoom')
   leaveRoom(client: any, room: string): void {
     const roomClients = this.rooms[room];
 
@@ -33,7 +60,12 @@ export class EventsGateway implements OnGatewayConnection, OnGatewayDisconnect {
     }
   }
 
-  @SubscribeMessage("events")
+  /**
+   * 클라이언트로부터 받은 이벤트 메시지를 처리하는 메시지 핸들러입니다.
+   * @param {any} client - 클라이언트
+   * @param {any} payload - 이벤트 메시지 페이로드
+   */
+  @SubscribeMessage('events')
   handleMessage(client: any, payload: any): void {
     for (const [room, clients] of Object.entries(this.rooms)) {
       if (clients.includes(client)) {
@@ -43,13 +75,17 @@ export class EventsGateway implements OnGatewayConnection, OnGatewayDisconnect {
     }
   }
 
-  private removeClientFromRooms(client): void {
+  private removeClientFromRooms(client: any): void {
     for (const [room, clients] of Object.entries(this.rooms)) {
       this.removeClientFromRoom(client, room, clients);
     }
   }
 
-  private removeClientFromRoom(client, room, clients): void {
+  private removeClientFromRoom(
+    client: any,
+    room: string,
+    clients: any[],
+  ): void {
     const clientIndex = clients.indexOf(client);
 
     if (clientIndex !== -1) {
@@ -57,8 +93,14 @@ export class EventsGateway implements OnGatewayConnection, OnGatewayDisconnect {
     }
   }
 
-  private sendPayloadToOtherClients(client, clients, payload): void {
-    clients.filter((roomClient) => roomClient !== client).forEach((roomClient) => roomClient.send(JSON.stringify(payload)));
+  private sendPayloadToOtherClients(
+    client: any,
+    clients: any[],
+    payload: any,
+  ): void {
+    clients
+      .filter((roomClient) => roomClient !== client)
+      .forEach((roomClient) => roomClient.send(JSON.stringify(payload)));
   }
 
   private generateUniqueId(): string {
