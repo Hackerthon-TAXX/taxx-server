@@ -1,5 +1,5 @@
 import { Histories } from "src/histories/entities/histories.entity";
-import { Column, Entity, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Riders {
@@ -23,6 +23,9 @@ export class Riders {
 
   @Column({ default: null, nullable: true })
   count: number;
+
+  @CreateDateColumn()
+  createTime: Date;
 
   @OneToMany(() => Histories, (history) => history.riders)
   histories: Histories[];
