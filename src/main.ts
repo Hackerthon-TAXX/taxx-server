@@ -23,10 +23,10 @@ async function bootstrap() {
     })
   );
 
-  const config = new DocumentBuilder().setTitle("").setVersion("1.0.0").setDescription("").build();
+  const config = new DocumentBuilder().setTitle("taxx").setVersion("0.0.1").setDescription("SW Hack").build();
 
   const swaggerCustomOptions = {
-    swaggerOptions: { docExpansion: "none" },
+    swaggerOptions: {},
   };
 
   const document = SwaggerModule.createDocument(app, config);

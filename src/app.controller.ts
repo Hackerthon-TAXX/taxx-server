@@ -3,6 +3,7 @@ import { AppService } from "./app.service";
 import { ApiTags } from "@nestjs/swagger";
 import { SuccessInterceptor } from "./common/interceptors/success.interceptor";
 
+@ApiTags("System")
 @Controller()
 @UseInterceptors(SuccessInterceptor)
 export class AppController {
