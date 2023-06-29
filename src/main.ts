@@ -16,7 +16,7 @@ async function bootstrap() {
   app.useGlobalInterceptors(new SuccessInterceptor());
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalFilters(new HttpExceptionFilter());
-  app.use(helmet({ contentSecurityPolicy: false, crossOriginResourcePolicy: false }));
+
   app.use(
     ["/docs", "/docs-json"],
     expressBasicAuth({
