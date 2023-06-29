@@ -4,7 +4,7 @@ import { RidersUpdateDto } from "./dto/riders.update.dto";
 import { Riders } from "./entities/riders.entity";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { getDistance } from "src/common/utils/useful.utils";
+import { strDistance } from "src/common/utils/useful.utils";
 
 @Injectable()
 export class RidersService {
@@ -62,8 +62,9 @@ export class RidersService {
         id: rider.id,
         name: rider.name,
         image: rider.image,
-        distance: getDistance(rider.latitude, rider.longitude, latitude, longitude),
-        rate: rider.sum / rider.count,
+        distance: strDistance(rider.latitude, rider.longitude, latitude, longitude),
+        rate: Math.ceil((rider.sum / rider.count) * 2 / 2),
+        count: rider.count,
       });
     });
 

@@ -12,10 +12,10 @@ export class Riders {
   @Column()
   image: string;
 
-  @Column({ type: "float" })
+  @Column({ type: "double" })
   latitude: number;
 
-  @Column({ type: "float" })
+  @Column({ type: "double" })
   longitude: number;
 
   @Column({ nullable: true })
