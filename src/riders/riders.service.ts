@@ -6,7 +6,11 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { RidersMoveDto } from './dto/riders.move.dto';
 import { RidersEvalsDto } from './dto/riders.evals.dto';
-import { strDistance } from 'src/common/utils/useful.utils';
+import {
+  getDistance,
+  predictTime,
+  strDistance,
+} from 'src/common/utils/useful.utils';
 
 /**
  * 기사님 관련 서비스입니다.
@@ -97,16 +101,20 @@ export class RidersService {
     findRiders.map((rider) => {
       const finalRate = rider.sum / rider.count;
       const firstDecimal = Math.floor((finalRate * 10) % 10) <= 5 ? 0.5 : 0.0;
+      const finalDistance = strDistance(
+        rider.latitude,
+        rider.longitude,
+        latitude,
+        longitude,
+      );
 
       locationList.push({
         id: rider.id,
         name: rider.name,
         image: rider.image,
-        distance: strDistance(
-          rider.latitude,
-          rider.longitude,
-          latitude,
-          longitude,
+        distance: finalDistance,
+        time: predictTime(
+          getDistance(rider.latitude, rider.longitude, latitude, longitude),
         ),
         rate: Math.floor(finalRate) + firstDecimal,
         count: rider.count,

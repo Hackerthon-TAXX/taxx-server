@@ -75,3 +75,18 @@ export const strDistance = (
 export const getRandomDistance = (): number => {
   return Math.random() * (0.007 - 0.002) + 0.002;
 };
+
+export const predictTime = (distance) => {
+  console.log(distance);
+  const speed = 0.001;
+  const time = distance * speed;
+
+  const hours = Math.floor(time / 60);
+  const minutes = Math.round(time % 60);
+
+  if (minutes < 6) {
+    return '근처예요';
+  }
+
+  return `${hours}시간 ${minutes}분`;
+};
