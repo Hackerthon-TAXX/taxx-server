@@ -79,15 +79,11 @@ export const getRandomDistance = (): number => {
 
 export const predictTime = (distance) => {
   console.log(distance);
-  const speed = 0.001;
+  const speed = 0.0005;
   const time = distance * speed;
 
   const hours = Math.floor(time / 60);
   const minutes = Math.round(time % 60);
 
-  if (minutes < 6) {
-    return '근처예요';
-  }
-
-  return `${hours}시간 ${minutes}분`;
+  return `최대${hours > 0 ? ` ${hours}시간` : ''} ${minutes}분`;
 };
