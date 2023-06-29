@@ -73,7 +73,7 @@ export const strDistance = (
  * @returns {number} 랜덤한 거리 값
  */
 export const getRandomDistance = (): number => {
-  return Math.random() * (0.007 - 0.002) + 0.002;
+  return Math.random() * (0.005 - 0.001) + 0.001;
 };
 
 export const predictTime = (distance) => {
