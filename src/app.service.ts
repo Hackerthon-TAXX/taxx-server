@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { UsersService } from "./users/users.service";
 import { RidersService } from "./riders/riders.service";
-import { getDistance } from "./common/utils/useful.utils";
+import { getDistance, getRandomDistance } from "./common/utils/useful.utils";
 
 @Injectable()
 export class AppService {
@@ -13,9 +13,16 @@ export class AppService {
 
   async getRiderMove(riderId: number, latitude: number, longitude: number) {
     const findRiders = await this.ridersService.findOne(riderId);
+    let moveLatitude = 0;
+    let moveLongitude = 0;
 
-    const moveLatitude = findRiders.latitude + 0.0003;
-    const moveLongitude = findRiders.longitude + 0.0003;
+    if (findRiders.latitude < latitude) {
+      moveLatitude = findRiders.latitude + getRandomDistance();
+      moveLongitude = findRiders.longitude + getRandomDistance();
+    } else {
+      moveLatitude = findRiders.latitude - getRandomDistance();
+      moveLongitude = findRiders.longitude - getRandomDistance();
+    }
 
     await this.ridersService.move(findRiders.id, {
       latitude: moveLatitude,

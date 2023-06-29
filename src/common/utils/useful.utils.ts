@@ -19,7 +19,7 @@ export function getDistance(lat1, lon1, lat2, lon2) {
 
 export function strDistance(lat1, lon1, lat2, lon2): String {
   if (lat1 == lat2 && lon1 == lon2) return "0m";
-  
+
   var radLat1 = (Math.PI * lat1) / 180;
   var radLat2 = (Math.PI * lat2) / 180;
   var theta = lon1 - lon2;
@@ -36,4 +36,8 @@ export function strDistance(lat1, lon1, lat2, lon2): String {
   } else {
     return (dist / 1000).toFixed(1) + "km";
   }
+}
+
+export function getRandomDistance(): number {
+  return Math.random() * (0.007 - 0.002) + 0.002;
 }
