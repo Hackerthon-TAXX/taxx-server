@@ -16,14 +16,9 @@ import { NoticesModule } from "./notices/notices.module";
 import { Notices } from "./notices/entities/notice.entity";
 import { UsersService } from "./users/users.service";
 import { RidersService } from "./riders/riders.service";
-import { ServeStaticModule } from "@nestjs/serve-static";
-import { join } from "path";
 
 @Module({
   imports: [
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, "..", "public", "kakao"),
-    }),
     ConfigModule.forRoot({
       isGlobal: true,
     }),

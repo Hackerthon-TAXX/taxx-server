@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+}
+
+hr {
+    width: calc(100% - 20px);
+}
+
+div.topBar {
+    padding: 10px;
+    position: fixed;
+    background-color: white;
+    width: 100%;
+}
+
+p.title {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 1000;
+    font-size: 17px;
+    margin-bottom: 5px;
+}
+
+p.date {
+    width: 100%;
+    color: rgb(63, 63, 63);
+    margin-bottom: 10px;
+}
+
+p.value {
+    margin: 0px 10px;
+    padding-top: 80px;
+    text-align: justify;
+    margin-bottom: 20px;
+}
