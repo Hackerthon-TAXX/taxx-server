@@ -8,7 +8,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { Users } from "./users/entities/users.entity";
 import { RidersModule } from "./riders/riders.module";
 import { Riders } from "./riders/entities/riders.entity";
-import { EvalsModule } from './evals/evals.module';
+import { EvalsModule } from "./evals/evals.module";
 import { Evals } from "./evals/entities/eval.entity";
 import { HistoriesModule } from "./histories/histories.module";
 import { Histories } from "./histories/entities/histories.entity";
