@@ -64,7 +64,8 @@ export const strDistance = (
   if (dist < 1000) {
     return dist + 'm';
   } else {
-    return (dist / 1000).toFixed(1) + 'km';
+    dist = (dist / 1000)
+    return dist.toFixed(1) + 'km';
   }
 };
 
