@@ -64,7 +64,7 @@ export const strDistance = (
   if (dist < 1000) {
     return dist + 'm';
   } else {
-    dist = (dist / 1000)
+    dist = dist / 1000;
     return dist.toFixed(1) + 'km';
   }
 };
@@ -74,7 +74,7 @@ export const strDistance = (
  * @returns {number} 랜덤한 거리 값
  */
 export const getRandomDistance = (): number => {
-  return Math.random() * (0.005 - 0.001) + 0.001;
+  return Math.random() * (0.002 - 0.0006) + 0.0006;
 };
 
 export const predictTime = (distance) => {
