@@ -4,7 +4,7 @@ import { Entity, Column, PrimaryColumn, OneToMany, CreateDateColumn } from "type
 
 @Entity()
 export class Users {
-  @PrimaryColumn()
+  @PrimaryColumn({type : "bigint"})
   id: number;
 
   @Column()
