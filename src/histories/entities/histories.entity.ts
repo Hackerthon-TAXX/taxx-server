@@ -22,17 +22,11 @@ export class Histories {
   @Column()
   payments: string;
 
-  @Column({ type: 'float' })
-  startLatitude: number;
+  @Column()
+  startAddress: string;
 
-  @Column({ type: 'float' })
-  startLongitude: number;
-
-  @Column({ type: 'float' })
-  arrivalLatitude: number;
-
-  @Column({ type: 'float' })
-  arrivalLongitude: number;
+  @Column()
+  arrivalAddress: string;
 
   @CreateDateColumn()
   createTime: Date;

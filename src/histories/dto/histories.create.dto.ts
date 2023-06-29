@@ -1,9 +1,9 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class HistoriesCreateDto {
   @ApiProperty({
-    description: "사용 유저 UID",
+    description: '사용 유저 UID',
     example: 1000,
     required: true,
   })
@@ -12,7 +12,7 @@ export class HistoriesCreateDto {
   usersId: number;
 
   @ApiProperty({
-    description: "기사 ID",
+    description: '기사 ID',
     example: 1,
     required: true,
   })
@@ -21,8 +21,8 @@ export class HistoriesCreateDto {
   ridersId: number;
 
   @ApiProperty({
-    description: "물품 사이즈",
-    example: "중",
+    description: '물품 사이즈',
+    example: '중',
     required: true,
   })
   @IsNotEmpty()
@@ -30,8 +30,8 @@ export class HistoriesCreateDto {
   size: string;
 
   @ApiProperty({
-    description: "요청 사항",
-    example: "유리 소재여서 깨질 수 있습니다. 조심히 다뤄주세요.",
+    description: '요청 사항',
+    example: '유리 소재여서 깨질 수 있습니다. 조심히 다뤄주세요.',
     required: true,
   })
   @IsNotEmpty()
@@ -39,8 +39,8 @@ export class HistoriesCreateDto {
   request: string;
 
   @ApiProperty({
-    description: "결제 수단",
-    example: "현대카드 486",
+    description: '결제 수단',
+    example: '현대카드 486',
     required: true,
   })
   @IsNotEmpty()
@@ -48,38 +48,20 @@ export class HistoriesCreateDto {
   payments: string;
 
   @ApiProperty({
-    description: "시작 위도",
-    example: 10.0,
+    description: '출발 주소',
+    example: '판교역',
     required: true,
   })
   @IsNotEmpty()
-  @IsNumber()
-  startLatitude: number;
+  @IsString()
+  startAddress: string;
 
   @ApiProperty({
-    description: "시작 경도",
-    example: 10.0,
+    description: '도착 주소',
+    example: '수원역',
     required: true,
   })
   @IsNotEmpty()
-  @IsNumber()
-  startLongitude: number;
-
-  @ApiProperty({
-    description: "도착 위도",
-    example: 10.1,
-    required: true,
-  })
-  @IsNotEmpty()
-  @IsNumber()
-  arrivalLatitude: number;
-
-  @ApiProperty({
-    description: "도착 경도",
-    example: 10.1,
-    required: true,
-  })
-  @IsNotEmpty()
-  @IsNumber()
-  arrivalLongitude: number;
+  @IsString()
+  arrivalAddress: string;
 }
