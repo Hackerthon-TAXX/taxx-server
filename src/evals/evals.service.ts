@@ -24,11 +24,13 @@ export class EvalsService {
       count: findRiders.count + 1,
     });
 
-    return this.evalsRepository.save({
+    await this.evalsRepository.save({
       ...body,
       users: findUsers,
       riders: findRiders,
     });
+
+    return body;
   }
 
   findAll() {
