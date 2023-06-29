@@ -60,9 +60,8 @@ export class UsersService {
     const newPayments = [];
 
     newPayments.push(...find.payments, body.payments);
-    console.log(JSON.stringify(newPayments));
 
-    const update = await this.usersRepository.update(find.id, {
+    await this.usersRepository.update(find.id, {
       payments: [...newPayments],
     });
 
