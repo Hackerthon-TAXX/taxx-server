@@ -18,10 +18,10 @@ export class Riders {
   @Column({ type: "float" })
   longitude: number;
 
-  @Column({ default: null, nullable: true })
+  @Column({ nullable: true })
   sum: number;
 
-  @Column({ default: null, nullable: true })
+  @Column({ nullable: true })
   count: number;
 
   @CreateDateColumn()

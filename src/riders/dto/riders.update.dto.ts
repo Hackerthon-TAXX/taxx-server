@@ -13,7 +13,7 @@ export class RidersUpdateDto {
 
   @ApiProperty({
     description: "기사 이미지",
-    example: "https://asdasdadsasd.com/asdadadasd",
+    example: "https://abc.com/gwansik",
     required: false,
   })
   @IsOptional()
