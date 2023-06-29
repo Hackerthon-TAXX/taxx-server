@@ -6,11 +6,13 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { NoticesService } from './notices.service';
 import { NoticesCreateDto } from './dto/notices.create.dto';
 import { NoticesUpdateDto } from './dto/notices.update.dto';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt/jwt.guard';
 
 /**
  * 공지사항 관련 API 컨트롤러입니다.
@@ -58,7 +60,9 @@ export class NoticesController {
    * @param {NoticesUpdateDto} body - 업데이트할 공지사항 정보
    * @returns {Promise<number>} 업데이트된 공지사항 ID
    */
-  @ApiOperation({ summary: '공지 정보 업데이트' })
+  @ApiOperation({ summary: '공지 업데이트' })
+  @ApiBearerAuth('access-token')
+  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   update(
     @Param('id') id: string,
@@ -72,7 +76,7 @@ export class NoticesController {
    * @param {string} id - 공지사항 ID
    * @returns {Promise<number>} 삭제된 공지사항 ID
    */
-  @ApiOperation({ summary: '공지 정보 삭제' })
+  @ApiOperation({ summary: '공지 삭제' })
   @Delete(':id')
   remove(@Param('id') id: string): Promise<number> {
     return this.noticesService.remove(+id);

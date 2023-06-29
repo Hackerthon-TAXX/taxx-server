@@ -33,8 +33,18 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('TAXX')
-    .setVersion('0.0.1')
+    .setVersion('1.0.0')
     .setDescription('SW중심대학 공동해커톤 2023 - TAXX팀')
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        name: 'JWT',
+        in: 'header',
+      },
+      'access-token',
+    )
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document, {});

@@ -7,12 +7,14 @@ import {
   Param,
   Delete,
   Logger,
+  UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UsersCreateDto } from './dto/users.create.dto';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { UsersUpdateDto } from './dto/users.update.dto';
 import { UsersPaymentsDto } from './dto/users.payments.dto';
+import { JwtAuthGuard } from 'src/auth/jwt/jwt.guard';
 
 /**
  * 사용자 관련 API 컨트롤러입니다.
