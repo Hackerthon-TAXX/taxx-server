@@ -1,6 +1,6 @@
-# OSS Notice | TAXX #
+# OSS Notice | taxx-server #
 
-This application is Copyright © TAXX Team. All rights reserved.
+This application is Copyright © TAXX-Team. All rights reserved.
 
 The following sets forth attribution notices for third party software that may be contained in this application.
 
@@ -20,11 +20,27 @@ Copyright 2020 Kamil Mysliwiec
 
 MIT License
 
+ **@nestjs/jwt**
+
+https://github.com/nestjs/jwt
+
+Copyright 2018-2021 Kamil Mysliwiec <https://kamilmysliwiec.com>
+
+MIT License
+
  **@nestjs/mapped-types**
 
 https://github.com/nestjs/mapped-types
 
 Copyright Kamil Mysliwiec
+
+MIT License
+
+ **@nestjs/passport**
+
+https://github.com/nestjs/passport
+
+Copyright 2017-2020 Kamil Mysliwiec <https://kamilmysliwiec.com>
 
 MIT License
 
@@ -115,6 +131,22 @@ MIT License
 https://github.com/sidorares/node-mysql2
 
 Copyright 2016 Andrey Sidorov (sidorares@yandex.ru) and contributors
+
+MIT License
+
+ **Passport**
+
+https://github.com/jaredhanson/passport
+
+Copyright 2011-2019 Jared Hanson
+
+MIT License
+
+ **passport-jwt**
+
+https://github.com/themikenicholson/passport-jwt
+
+Copyright 2014 themikenicholson
 
 MIT License
 
