@@ -5,7 +5,7 @@ import * as expressBasicAuth from "express-basic-auth";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { ValidationPipe } from "@nestjs/common";
 import { HttpExceptionFilter } from "./common/exceptions/http-exception.filter";
-import helmet from "helmet";
+// import helmet from "helmet";
 import { SuccessInterceptor } from "./common/interceptors/success.interceptor";
 import { join } from "path";
 
@@ -16,7 +16,7 @@ async function bootstrap() {
   app.useGlobalInterceptors(new SuccessInterceptor());
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalFilters(new HttpExceptionFilter());
-
+  // app.use(helmet({ contentSecurityPolicy: false }));
   app.use(
     ["/docs", "/docs-json"],
     expressBasicAuth({
