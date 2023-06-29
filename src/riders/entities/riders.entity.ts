@@ -18,7 +18,7 @@ export class Riders {
   @Column({ type: "float" })
   longitude: number;
 
-  @Column({ nullable: true })
+  @Column({ type: "float", nullable: true })
   sum: number;
 
   @Column({ nullable: true })

@@ -19,6 +19,11 @@ export class EvalsService {
     const findUsers = await this.usersService.findOne(body.usersId);
     const findRiders = await this.ridersService.findOne(body.ridersId);
 
+    await this.ridersService.updateEvals(findRiders.id, {
+      sum: body.rate + findRiders.sum,
+      count: findRiders.count + 1,
+    });
+
     return this.evalsRepository.save({
       ...body,
       users: findUsers,

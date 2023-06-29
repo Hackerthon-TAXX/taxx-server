@@ -5,6 +5,8 @@ import { Riders } from "./entities/riders.entity";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { getDistance } from "src/common/utils/useful.utils";
+import { RidersMoveDto } from "./dto/riders.move.dto";
+import { RidersEvalsDto } from "./dto/riders.evals.dto";
 
 @Injectable()
 export class RidersService {
@@ -68,5 +70,17 @@ export class RidersService {
     });
 
     return locationList.sort((a, b) => a.distance - b.distance);
+  }
+
+  async move(id: number, body: RidersMoveDto) {
+    await this.ridersRepository.update(id, body);
+    return id;
+  }
+
+  async updateEvals(id: number, body: RidersEvalsDto) {
+    await this.findOne(id);
+
+    await this.ridersRepository.update(id, body);
+    return id;
   }
 }
