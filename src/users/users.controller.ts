@@ -28,12 +28,6 @@ export class UsersController {
     return this.usersService.findOne(id);
   }
 
-  @ApiOperation({ summary: "유저 이용내역" })
-  @Get("histories/:id")
-  getHistories(@Param("id") id: number) {
-    return this.usersService.getHistories(id);
-  }
-
   @ApiOperation({ summary: "유저 정보 업데이트" })
   @Patch(":id")
   update(@Param("id") id: string, @Body() body: UsersUpdateDto) {
@@ -44,6 +38,18 @@ export class UsersController {
   @Delete(":id")
   remove(@Param("id") id: string) {
     return this.usersService.remove(+id);
+  }
+
+  @ApiOperation({ summary: "유저 이용내역" })
+  @Get("histories/:id")
+  getHistories(@Param("id") id: number) {
+    return this.usersService.getHistories(id);
+  }
+
+  @ApiOperation({ summary: "유저 평가내역" })
+  @Get("evals/:id")
+  getEvals(@Param("id") id: number) {
+    return this.usersService.getEvals(id);
   }
 
   @ApiOperation({ summary: "결제 리스트" })
