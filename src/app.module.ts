@@ -12,6 +12,8 @@ import { EvalsModule } from './evals/evals.module';
 import { Evals } from "./evals/entities/eval.entity";
 import { HistoriesModule } from "./histories/histories.module";
 import { Histories } from "./histories/entities/histories.entity";
+import { NoticesModule } from './notices/notices.module';
+import { Notices } from "./notices/entities/notice.entity";
 
 @Module({
   imports: [
@@ -26,13 +28,14 @@ import { Histories } from "./histories/entities/histories.entity";
       username: process.env.DB_USER,
       password: process.env.DB_PASS,
       database: process.env.DB_BASE,
-      entities: [Users, Riders, Histories, Evals],
+      entities: [Users, Riders, Histories, Evals, Notices],
       synchronize: true,
     }),
     UsersModule,
     RidersModule,
     EvalsModule,
     HistoriesModule,
+    NoticesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
