@@ -5,6 +5,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Users } from "./entities/users.entity";
 import { Repository } from "typeorm";
 import { UsersPaymentsDto } from "./dto/users.payments.dto";
+import { Evals } from "../evals/entities/eval.entity";
 
 @Injectable()
 export class UsersService {
@@ -84,5 +85,23 @@ export class UsersService {
     }
 
     return find.histories;
+  }
+
+  async getEvals(id: number) {
+    const find = await this.usersRepository.findOne({
+      where: { id },
+      relations: { evals: true },
+      order: {
+        evals: {
+          id: "DESC",
+        },
+      },
+    });
+
+    if (!find) {
+      throw new HttpException("not found", HttpStatus.OK);
+    }
+
+    return find.evals;
   }
 }

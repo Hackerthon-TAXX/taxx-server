@@ -13,7 +13,7 @@ export class RidersCreateDto {
 
   @ApiProperty({
     description: "Rider의 프로필 사진 URL",
-    example: "https://asdasdasd.com",
+    example: "https://abc.com",
     required: true,
   })
   @IsNotEmpty()

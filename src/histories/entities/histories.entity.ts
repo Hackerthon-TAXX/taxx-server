@@ -16,16 +16,16 @@ export class Histories {
   @Column()
   payments: string;
 
-  @Column()
+  @Column({ type: "float" })
   startLatitude: number;
 
-  @Column()
+  @Column({ type: "float" })
   startLongitude: number;
 
-  @Column()
+  @Column({ type: "float" })
   arrivalLatitude: number;
 
-  @Column()
+  @Column({ type: "float" })
   arrivalLongitude: number;
 
   @CreateDateColumn()

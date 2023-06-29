@@ -1,21 +1,24 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Riders } from "src/riders/entities/riders.entity";
+import { Users } from "src/users/entities/users.entity";
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Evals {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    // 외래키 설정 필요
-    rider: number;
-    
-    @Column()
-    // 외래키 설정 필요
-    user: number;
-    
-    @Column({ type: "float" })
-    rate: number;
+  @Column({ type: "float" })
+  rate: number;
 
-    @Column({default: null, nullable: true })
-    comment: string;
+  @Column({ nullable: true })
+  comment: string;
+
+  @CreateDateColumn()
+  createTime: Date;
+
+  @ManyToOne(() => Users, (user) => user.evals)
+  users: Users;
+
+  @ManyToOne(() => Riders, (rider) => rider.histories)
+  riders: Riders;
 }
