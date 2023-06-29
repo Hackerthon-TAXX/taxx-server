@@ -7,7 +7,6 @@ import { SuccessInterceptor } from "src/common/interceptors/success.interceptor"
 
 @ApiTags("Riders")
 @Controller("riders")
-@UseInterceptors(SuccessInterceptor)
 export class RidersController {
   constructor(private readonly ridersService: RidersService) {}
 

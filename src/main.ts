@@ -6,10 +6,12 @@ import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { ValidationPipe } from "@nestjs/common";
 import { HttpExceptionFilter } from "./common/exceptions/http-exception.filter";
 import helmet from "helmet";
+import { SuccessInterceptor } from "./common/interceptors/success.interceptor";
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
+  app.useGlobalInterceptors(new SuccessInterceptor());
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalFilters(new HttpExceptionFilter());
   app.use(helmet());

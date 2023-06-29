@@ -59,6 +59,7 @@ export class RidersService {
 
     findRiders.map((rider) => {
       locationList.push({
+        id: rider.id,
         name: rider.name,
         image: rider.image,
         distance: getDistance(rider.latitude, rider.longitude, latitude, longitude),
