@@ -19,11 +19,13 @@ export class HistoriesService {
     const findUsers = await this.usersService.findOne(body.usersId);
     const findRiders = await this.ridersService.findOne(body.ridersId);
 
-    return this.historiesRepository.save({
+    await this.historiesRepository.save({
       ...body,
       users: findUsers,
       riders: findRiders,
     });
+
+    return body;
   }
 
   findAll() {
