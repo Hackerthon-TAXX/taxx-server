@@ -1,9 +1,10 @@
-import { HttpException, Injectable } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable, Logger } from "@nestjs/common";
 import { UsersCreateDto } from "./dto/users.create.dto";
 import { UsersUpdateDto } from "./dto/users.update.dto";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Users } from "./entities/users.entity";
 import { Repository } from "typeorm";
+import { UsersPaymentsDto } from "./dto/users.payments.dto";
 
 @Injectable()
 export class UsersService {
@@ -48,5 +49,31 @@ export class UsersService {
     } else {
       return "not found";
     }
+  }
+
+  async getPayments(id: number) {
+    const find = await this.findOne(id);
+
+    if (find) {
+      return find.payments;
+    }
+
+    throw new HttpException("not found", HttpStatus.OK);
+  }
+
+  async addPayments(body: UsersPaymentsDto) {
+    const find = await this.findOne(+body.id);
+    const newPayments = [];
+
+    if (find) {
+      newPayments.push(...find.payments, body.payments);
+      console.log(JSON.stringify(newPayments));
+
+      this.usersRepository.update(find.id, {
+        payments: [...newPayments],
+      });
+    }
+
+    throw new HttpException("not found", HttpStatus.OK);
   }
 }

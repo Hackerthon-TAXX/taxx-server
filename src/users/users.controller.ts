@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors } from "@nestjs/common";
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, Logger } from "@nestjs/common";
 import { UsersService } from "./users.service";
 import { UsersCreateDto } from "./dto/users.create.dto";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
 import { SuccessInterceptor } from "src/common/interceptors/success.interceptor";
 import { UsersUpdateDto } from "./dto/users.update.dto";
+import { UsersPaymentsDto } from "./dto/users.payments.dto";
 
 @ApiTags("Users")
 @Controller("users")
@@ -39,5 +40,18 @@ export class UsersController {
   @Delete(":id")
   remove(@Param("id") id: string) {
     return this.usersService.remove(+id);
+  }
+
+  @ApiOperation({ summary: "결제 리스트" })
+  @Get("payments/:id")
+  getPayments(@Param("id") id: string) {
+    Logger.log(id);
+    return this.usersService.getPayments(+id);
+  }
+
+  @ApiOperation({ summary: "결제 수단 추가" })
+  @Post("payments")
+  addPayments(@Body() body: UsersPaymentsDto) {
+    return this.usersService.addPayments(body);
   }
 }

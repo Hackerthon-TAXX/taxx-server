@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsNumber, IsObject, IsOptional, IsString } from "class-validator";
+import { IsArray, IsObject, IsOptional, IsString } from "class-validator";
 
 export class UsersUpdateDto {
   @ApiProperty({
@@ -13,10 +13,13 @@ export class UsersUpdateDto {
 
   @ApiProperty({
     description: "결제수단",
-    example: { logo: "kakao", label: "카카오뱅크 1234" },
+    example: [
+      { type: "kakao", label: "카카오뱅크 1234" },
+      { type: "ApplePay", label: "현대카드 486" },
+    ],
     required: false,
   })
   @IsOptional()
-  @IsObject()
-  payments: string;
+  @IsArray()
+  payments: Array<Object>;
 }
