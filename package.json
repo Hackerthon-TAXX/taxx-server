@@ -1,10 +1,10 @@
 {
   "name": "api-taxx",
   "version": "1.0.0",
-  "description": "",
-  "author": "",
+  "description": "sw-hack-taxx",
+  "author": "taxx-team",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
