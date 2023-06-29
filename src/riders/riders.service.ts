@@ -64,7 +64,7 @@ export class RidersService {
         name: rider.name,
         image: rider.image,
         distance: strDistance(rider.latitude, rider.longitude, latitude, longitude),
-        rate: (rider.sum != null) ? Math.ceil(((rider.sum / rider.count) * 2) / 2) : 0.0,
+        rate: rider.sum != null && rider.count > 0 ? Math.ceil(((rider.sum / rider.count) * 2) / 2) : 0.0,
         count: rider.count,
       });
     });
