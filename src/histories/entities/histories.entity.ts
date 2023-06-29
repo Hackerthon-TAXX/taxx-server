@@ -1,6 +1,6 @@
 import { Riders } from "src/riders/entities/riders.entity";
 import { Users } from "src/users/entities/users.entity";
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, CreateDateColumn } from "typeorm";
 
 @Entity()
 export class Histories {
@@ -14,6 +14,9 @@ export class Histories {
   request: string;
 
   @Column()
+  payments: string;
+
+  @Column()
   startLatitude: number;
 
   @Column()
@@ -24,6 +27,9 @@ export class Histories {
 
   @Column()
   arrivalLongitude: number;
+
+  @CreateDateColumn()
+  createTime: Date;
 
   @ManyToOne(() => Users, (user) => user.histories)
   users: Users;

@@ -16,10 +16,14 @@ export class HistoriesService {
   ) {}
 
   async create(body: HistoriesCreateDto) {
-    await this.usersService.findOne(body.usersId);
-    await this.ridersService.findOne(body.ridersId);
+    const findUsers = await this.usersService.findOne(body.usersId);
+    const findRiders = await this.ridersService.findOne(body.ridersId);
 
-    return this.historiesRepository.save(body);
+    return this.historiesRepository.save({
+      ...body,
+      users: findUsers,
+      riders: findRiders,
+    });
   }
 
   findAll() {

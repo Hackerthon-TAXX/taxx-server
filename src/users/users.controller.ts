@@ -1,8 +1,7 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, Logger } from "@nestjs/common";
+import { Controller, Get, Post, Body, Patch, Param, Delete, Logger } from "@nestjs/common";
 import { UsersService } from "./users.service";
 import { UsersCreateDto } from "./dto/users.create.dto";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
-import { SuccessInterceptor } from "src/common/interceptors/success.interceptor";
 import { UsersUpdateDto } from "./dto/users.update.dto";
 import { UsersPaymentsDto } from "./dto/users.payments.dto";
 
@@ -27,6 +26,12 @@ export class UsersController {
   @Get(":id")
   findOne(@Param("id") id: number) {
     return this.usersService.findOne(id);
+  }
+
+  @ApiOperation({ summary: "유저 이용내역" })
+  @Get("histories/:id")
+  getHistories(@Param("id") id: number) {
+    return this.usersService.getHistories(id);
   }
 
   @ApiOperation({ summary: "유저 정보 업데이트" })

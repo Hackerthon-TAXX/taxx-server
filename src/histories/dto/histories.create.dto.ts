@@ -3,6 +3,24 @@ import { IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class HistoriesCreateDto {
   @ApiProperty({
+    description: "사용 유저 UID",
+    example: 1000,
+    required: true,
+  })
+  @IsNotEmpty()
+  @IsNumber()
+  usersId: number;
+
+  @ApiProperty({
+    description: "기사 ID",
+    example: 1,
+    required: true,
+  })
+  @IsNotEmpty()
+  @IsNumber()
+  ridersId: number;
+
+  @ApiProperty({
     description: "물품 사이즈",
     example: "중",
     required: true,
@@ -19,6 +37,15 @@ export class HistoriesCreateDto {
   @IsNotEmpty()
   @IsString()
   request: string;
+
+  @ApiProperty({
+    description: "결제 수단",
+    example: "현대카드 486",
+    required: true,
+  })
+  @IsNotEmpty()
+  @IsString()
+  payments: string;
 
   @ApiProperty({
     description: "시작 위도",
@@ -55,22 +82,4 @@ export class HistoriesCreateDto {
   @IsNotEmpty()
   @IsNumber()
   arrivalLongitude: number;
-
-  @ApiProperty({
-    description: "사용 유저 UID",
-    example: 1000,
-    required: true,
-  })
-  @IsNotEmpty()
-  @IsNumber()
-  usersId: number;
-
-  @ApiProperty({
-    description: "기사 ID",
-    example: 1,
-    required: true,
-  })
-  @IsNotEmpty()
-  @IsNumber()
-  ridersId: number;
 }

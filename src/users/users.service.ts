@@ -67,4 +67,22 @@ export class UsersService {
 
     return [...newPayments];
   }
+
+  async getHistories(id: number) {
+    const find = await this.usersRepository.findOne({
+      where: { id },
+      relations: { histories: true },
+      order: {
+        histories: {
+          id: "DESC",
+        },
+      },
+    });
+
+    if (!find) {
+      throw new HttpException("not found", HttpStatus.OK);
+    }
+
+    return find.histories;
+  }
 }
