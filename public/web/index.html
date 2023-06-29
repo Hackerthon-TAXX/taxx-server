@@ -2,25 +2,57 @@
 
 <head>
     <script>
-        const socket = new WebSocket('ws://localhost:28080');
-        socket.onopen = function () {
-            console.log('Connected');
+        let latitude = 0;
+        let longitude = 0;
+        let socket = null;
 
-            socket.send(
-                JSON.stringify({
-                    event: 'events',
-                    data: 'test',
-                }),
-            );
+        function connect(room) {
+            socket = new WebSocket(`ws://localhost:10009`);
 
-            socket.onmessage = function (data) {
-                console.log(JSON.stringify(data.data));
+            socket.onopen = function () {
+                socket.send(
+                    JSON.stringify({
+                        event: 'joinRoom',
+                        data: room,
+                    }),
+                );
+
+                setInterval(sendPosition, 600);
+
+                socket.onmessage = function (data) {
+                    console.log(data.data);
+                };
             };
-        };
+        }
+
+        function disconnect() {
+            if (socket !== null) {
+                socket.close();
+                console.log('Disconnected');
+            }
+        }
+
+        function sendPosition() {
+            const position = {
+                x: latitude,
+                y: longitude,
+            };
+
+            if (socket !== null && socket.readyState === WebSocket.OPEN) {
+                socket.send(
+                    JSON.stringify({
+                        event: 'events',
+                        data: position,
+                    }),
+                );
+            }
+        }
     </script>
 </head>
 
 <body>
+    <button onclick="connect('12345678')">ID 1234랑 접속</button>
+    <button onclick="disconnect()">연결끊기</button>
 </body>
 
 </html>
