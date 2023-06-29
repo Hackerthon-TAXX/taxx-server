@@ -18,9 +18,13 @@ export class AppService {
 
     if (findRiders.latitude < latitude) {
       moveLatitude = findRiders.latitude + getRandomDistance();
-      moveLongitude = findRiders.longitude + getRandomDistance();
     } else {
       moveLatitude = findRiders.latitude - getRandomDistance();
+    }
+
+    if (findRiders.longitude < longitude) {
+      moveLongitude = findRiders.longitude + getRandomDistance();
+    } else {
       moveLongitude = findRiders.longitude - getRandomDistance();
     }
 
