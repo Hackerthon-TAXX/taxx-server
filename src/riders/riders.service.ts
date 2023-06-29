@@ -59,12 +59,15 @@ export class RidersService {
     }
 
     findRiders.map((rider) => {
+      const finalRate = rider.sum / rider.count;
+      const firstDecimal = Math.floor((finalRate * 10) % 10) <= 5 ? 0.5 : 0.0;
+
       locationList.push({
         id: rider.id,
         name: rider.name,
         image: rider.image,
         distance: strDistance(rider.latitude, rider.longitude, latitude, longitude),
-        rate: rider.sum != null && rider.count > 0 ? Math.ceil(((rider.sum / rider.count) * 2) / 2) : 0.0,
+        rate: Math.floor(finalRate) + firstDecimal,
         count: rider.count,
       });
     });
