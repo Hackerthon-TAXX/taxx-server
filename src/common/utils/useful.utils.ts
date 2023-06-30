@@ -79,7 +79,7 @@ export const getRandomDistance = (): number => {
 
 export const predictTime = (distance) => {
   console.log(distance);
-  const speed = 0.0005;
+  const speed = 0.0001;
   const time = distance * speed;
 
   const hours = Math.floor(time / 60);
