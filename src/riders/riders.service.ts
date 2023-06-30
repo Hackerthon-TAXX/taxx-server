@@ -101,7 +101,7 @@ export class RidersService {
     findRiders.map((rider) => {
       const finalRate = rider.sum / rider.count;
       const firstDecimal = Math.floor((finalRate * 10) % 10) <= 5 ? 0.5 : 0.0;
-      const finalDistance = getDistance(
+      const finalDistance = strDistance(
         rider.latitude,
         rider.longitude,
         latitude,
