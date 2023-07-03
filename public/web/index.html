@@ -2,12 +2,12 @@
 
 <head>
     <script>
-        let latitude = 0;
-        let longitude = 0;
+        let latitude = 0; // 초기값 설정
+        let longitude = 0; // 초기값 설정
         let socket = null;
 
         function connect(room) {
-            socket = new WebSocket(`ws://localhost:10009`);
+            socket = new WebSocket('ws://localhost:10009');
 
             socket.onopen = function () {
                 socket.send(
@@ -33,26 +33,56 @@
         }
 
         function sendPosition() {
-            const position = {
-                x: latitude,
-                y: longitude,
-            };
+            if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    latitude = position.coords.latitude;
+                    longitude = position.coords.longitude;
 
-            if (socket !== null && socket.readyState === WebSocket.OPEN) {
-                socket.send(
-                    JSON.stringify({
-                        event: 'events',
-                        data: position,
-                    }),
-                );
+                    const positionData = {
+                        latitude: latitude,
+                        longitude: longitude,
+                        x: latitude,
+                        y: longitude,
+                    };
+
+                    if (socket !== null && socket.readyState === WebSocket.OPEN) {
+                        socket.send(
+                            JSON.stringify({
+                                event: 'events',
+                                data: positionData,
+                            }),
+                        );
+                    }
+                });
+            } else {
+                console.log('Geolocation is not supported by this browser.');
             }
         }
     </script>
 </head>
 
 <body>
-    <button onclick="connect('12345678')">ID 1234랑 접속</button>
+    <label for="latitudeInput">위도:</label>
+    <input type="text" id="latitudeInput">
+
+    <label for="longitudeInput">경도:</label>
+    <input type="text" id="longitudeInput">
+
+    <button onclick="connect('12345678')">실시간 공유</button>
     <button onclick="disconnect()">연결끊기</button>
+
+    <script>
+        function updatePosition() {
+            const latitudeInput = document.getElementById('latitudeInput');
+            const longitudeInput = document.getElementById('longitudeInput');
+
+            latitude = parseFloat(latitudeInput.value);
+            longitude = parseFloat(longitudeInput.value);
+        }
+
+        document.getElementById('latitudeInput').addEventListener('input', updatePosition);
+        document.getElementById('longitudeInput').addEventListener('input', updatePosition);
+    </script>
 </body>
 
 </html>

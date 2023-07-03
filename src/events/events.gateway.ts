@@ -22,7 +22,7 @@ export class EventsGateway implements OnGatewayConnection, OnGatewayDisconnect {
    */
   public handleConnection(client: any): void {
     client['id'] = this.generateUniqueId();
-    // Logger.log(client["id"], "Connection");
+    Logger.log(client['id'], 'Connection');
   }
 
   /**
@@ -43,7 +43,6 @@ export class EventsGateway implements OnGatewayConnection, OnGatewayDisconnect {
   joinRoom(client: any, room: string): void {
     if (!this.rooms[room]) this.rooms[room] = [];
     this.rooms[room].push(client);
-    Logger.log(`${room} - ${client.id}`);
   }
 
   /**
